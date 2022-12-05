@@ -19,6 +19,7 @@ class _SecondScreenState extends State<SecondScreen> {
     //listen to changes
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: widget.color,
         title: Text(widget.title),
       ),
       body: BlocListener<CounterCubit, CounterState>(
@@ -53,6 +54,8 @@ class _SecondScreenState extends State<SecondScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FloatingActionButton(
+                    heroTag: UniqueKey(),
+                    backgroundColor: widget.color,
                     onPressed: () {
                       //change state
                       BlocProvider.of<CounterCubit>(context).decrement();
@@ -62,6 +65,8 @@ class _SecondScreenState extends State<SecondScreen> {
                     child: const Icon(Icons.remove),
                   ),
                   FloatingActionButton(
+                    heroTag: UniqueKey(),
+                    backgroundColor: widget.color,
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).resetCounter();
                     },
@@ -69,6 +74,8 @@ class _SecondScreenState extends State<SecondScreen> {
                     child: const Icon(Icons.restart_alt),
                   ),
                   FloatingActionButton(
+                    heroTag: UniqueKey(),
+                    backgroundColor: widget.color,
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).increment();
                     },
@@ -77,13 +84,6 @@ class _SecondScreenState extends State<SecondScreen> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 24,
-              ),
-              MaterialButton(
-                color: widget.color,
-                onPressed: () {}, child: Text("Go to second screen"),)
-
             ],
           ),
         ),

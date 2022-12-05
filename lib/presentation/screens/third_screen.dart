@@ -3,22 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/cubit/counter_cubit.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.title, required this.color});
+class ThirdScreen extends StatefulWidget {
+  const ThirdScreen({super.key, required this.title, required this.color});
 
   final String title;
   final Color color;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ThirdScreen> createState() => _ThirdScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     //listen to changes
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: widget.color,
         title: Text(widget.title),
       ),
       body: BlocListener<CounterCubit, CounterState>(
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FloatingActionButton(
+                    backgroundColor: widget.color,
                     heroTag: UniqueKey(),
                     onPressed: () {
                       //change state
@@ -63,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(Icons.remove),
                   ),
                   FloatingActionButton(
+                    backgroundColor: widget.color,
                     heroTag: UniqueKey(),
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).resetCounter();
@@ -71,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(Icons.restart_alt),
                   ),
                   FloatingActionButton(
+                    backgroundColor: widget.color,
                     heroTag: UniqueKey(),
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).increment();
@@ -79,28 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Icon(Icons.add),
                   ),
                 ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              MaterialButton(
-                color: widget.color,
-                onPressed: () {
-                  // Named Routing
-                  Navigator.of(context).pushNamed('/second');
-                },
-                child: const Text("Go to second screen"),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              MaterialButton(
-                color: widget.color,
-                onPressed: () {
-                  // Named Routing
-                  Navigator.of(context).pushNamed('/third');
-                },
-                child: const Text("Go to third screen"),
               ),
             ],
           ),
