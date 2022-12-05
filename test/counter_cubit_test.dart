@@ -1,16 +1,22 @@
 import 'package:bloc_counter/logic/cubit/counter_cubit.dart';
+import 'package:bloc_counter/logic/cubit/internet_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final CounterState counterState1 = CounterState(counterValue: 1);
   final CounterState counterState2 = CounterState(counterValue: 1);
   group('CounterCubit', () {
+    Connectivity? connectivity;
     CounterCubit? counterCubit;
+    InternetCubit? internetCubit;
 
-    //initialize the necesary data
+    //initialize the necessary data
     setUp(() => {
-          counterCubit = CounterCubit(),
+          connectivity = Connectivity(),
+          internetCubit = InternetCubit(connectivity: connectivity!),
+          counterCubit = CounterCubit(internetCubit: internetCubit!),
         });
     // it will apply only in the group
     tearDown(() => counterCubit?.close());
