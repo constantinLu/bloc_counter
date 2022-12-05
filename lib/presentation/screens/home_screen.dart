@@ -1,41 +1,20 @@
+import 'package:bloc_counter/presentation/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/counter_cubit.dart';
+import '../../logic/cubit/counter_cubit.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterCubit(),
-      child: MaterialApp(
-        title: 'Counter Cubit Demo',
-        theme: ThemeData(
-            primarySwatch: Colors.grey, visualDensity: VisualDensity.adaptivePlatformDensity),
-        debugShowCheckedModeBanner: false,
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.title, required this.color});
 
   final String title;
+  final Color color;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     //listen to changes
@@ -45,7 +24,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: BlocListener<CounterCubit, CounterState>(
         listener: (context, state) {
-
           if (state.wasIncremented == true) {
             const snackBar = SnackBar(
               content: Text('Yay! A SnackBar!'),
@@ -100,6 +78,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 24,
+              ),
+              MaterialButton(
+                color: widget.color,
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          const SecondScreen(title: "SecondScreen", color: Colors.red)));
+                },
+                child: const Text("Go to second screen"),
+              )
             ],
           ),
         ),
